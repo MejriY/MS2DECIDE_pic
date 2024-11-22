@@ -7,10 +7,10 @@ image::https://github.com/MejriY/Decide_test/raw/master/image/all_article_workfl
 
        
 == The logic behind the tool
-image::https://github.com/MejriY/MS2DECIDE_pic/raw/master/image/who%20it%20work.png[]
+image::https://github.com/MejriY/Decide_test/raw/master/image/who%20it%20work.png[]
        
 === Weighted iterative GNPS analog search (WIGAS)
-image::https://github.com/MejriY/MS2DECIDE_pic/raw/master/image/gnps_iterative.png[]
+image::https://github.com/MejriY/Decide_test/raw/master/image/gnps_iterative.png[]
 == Installation
 You can install **MS2DECIDE** using either `pip` (recommended for most users) or `conda`. Follow the instructions below based on your preferred method:
 
