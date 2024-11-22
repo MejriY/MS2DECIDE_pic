@@ -6,7 +6,7 @@ MS2DECIDE is a Python library that leverages decision theory to assist chemists 
 image::https://github.com/MejriY/MS2DECIDE_pic/blob/main/image/all_article_workflow.png[]
        
 == The logic behind the tool
-image::https://github.com/MejriY/MS2DECIDE_pic/raw/master/image/who%20it%20work.png[]
+image::https://github.com/MejriY/MS2DECIDE_pic/blob/master/image/who%20it%20work.png[]
        
 === Weighted iterative GNPS analog search (WIGAS)
 image::https://github.com/MejriY/MS2DECIDE_pic/raw/master/image/gnps_iterative.png[]
