@@ -22,6 +22,8 @@ The `K_estimation` function:
    - Specify the paths to the following required files:
      - **Quantitative Data File**: A `.csv` file containing the quantitative data for your analysis. Ensure the file format is correct to avoid errors.
      - **MGF File**: A file containing mass spectrometry data in MGF format.
+     - **FBMN Title:** Provide a unique and descriptive title for your FBMN job. **Note**: A folder with this title will be created to upload the quantitative data and MGF file. Ensure the title you choose does not match the name of an existing folder.
+   
    - Example paths:
      ```plaintext
      SELECT THE PATH FOR YOUR QUANTITATIVE FILE 
@@ -31,15 +33,17 @@ The `K_estimation` function:
      : /path/to/mgf_file.mgf
      ```
 
-3. **Set Up GNPS Workflow**
+4. **Set Up GNPS Workflow**
    - Choose the GNPS job title and the type of research:
      - `strict`: Uses a mass difference tolerance of 0.02 Da. For more precise information, we recommend visiting the [GNPS Documentation on Library Search](https://ccms-ucsd.github.io/GNPSDocumentation/librarysearch/). **Note**: This workflow uses a Score Threshold of `0.001`.
      - `iterative`: Utilizes a weighted iterative GNPS analog search.
 
+At this level, FBMN jobs will be create in your GNPS account. In the case of `strict`
+
 4. **ISDB-Lotus Annotation**
    - The ISDB-Lotus annotation is performed using the function `isdb_res = get_cfm_annotation(mgf, ISDBtol)`. During the process, the user will be prompted to provide:
      - **Ionization Mode**: Specify the ionization mode for annotation (`POS` for positive, `NEG` for negative).
-     - **Mass Tolerance**: Provide a mass tolerance value less than `0.5` (default: `0.02`).
+     - **Mass Tolerance**: Provide a mass tolerance value less than `0.5` (default: `0.02`). **Note**: This value is between 0 and 0.5.
    - This function calculates annotations by matching mass spectrometry data with ISDB-Lotus spectral data.
 
 5. **Sirius Annotation**
@@ -48,27 +52,24 @@ The `K_estimation` function:
      - `exact`
      - `approximate`
 
-6. **Run and Wait for Completion**
-   - The function monitors the GNPS workflow for completion and raises an exception if the workflow fails.
-
-7. **Compile Results**
-   - Results from GNPS, Sirius, and ISDB are compiled into a unified dataframe.
+6. **Compile Results**
+   - Results from GNPS, Sirius, and ISDB-LOTUS are compiled into a unified dataframe.
    - The dataframe is filtered and sorted by \( K \)-values.
 
-8. **Export Results**
+7. **Export Results**
    - Specify the path to save the output `.tsv` file:
      ```plaintext
      SELECT THE SAVE PATH FOR THE .TSV FILE OF MS2DECIDE. 
-     This path needs to terminate with a file_name.tsv where `file_name` is the desired name specified by the user.
+     #This path needs to terminate with a file_name.tsv where `file_name` is the desired name specified by the user.
      ```
 
-9. **Optional: Retrieve Empty Annotations**
+8. **Optional: Retrieve Empty Annotations in the case of GNPS iterative**
    - If requested (`yes`), the function generates a report of empty annotations and saves it as `empty.tsv`.
 
 ---
 
 ### **Return Value**
-The function returns a Pandas DataFrame containing the filtered and processed results.
+The function returns a (`tsv file`)containing the **processed** and **ranked** results.
 
 ---
 
