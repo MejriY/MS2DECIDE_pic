@@ -1,0 +1,81 @@
+= MS2DECIDE
+
+image::https://github.com/MejriY/Decide_test/raw/master/image/ms2decide_logo.png[]
+
+MS2DECIDE is a Python library that leverages decision theory to assist chemists in natural products annotation and targeting. By gathering insights from domain experts and modeling their intuition, the library offers a structured, data-driven approach to interpreting multiannotated tandem mass spectrometry data. MS2DECIDE integrates GNPS (enhanced with a weighted iterative analog search), ISDB-LOTUS and Sirius6 annotations to deliver reliable recommendation even in uncertain scenarios. This library bridges expert knowledge and computational efficiency, simplifying complex workflows and enabling chemists to make informed, confident decisions in metabolite research.
+image::https://github.com/MejriY/Decide_test/raw/master/image/all_article_workflow.png[]
+
+== The logic behind the tool
+image::https://github.com/MejriY/Decide_test/raw/master/image/who%20it%20work.png[]
+       
+=== Weighted iterative GNPS analog search (WIGAS)
+image::https://github.com/MejriY/Decide_test/raw/master/image/gnps_iterative.png[]
+== Installation
+You can install **MS2DECIDE** using either `pip` (recommended for most users) or `conda`. Follow the instructions below based on your preferred method:
+
+**Ensure Python is installed**  
+   Before proceeding, make sure Python (version 3.8 or higher) is installed on your system. Alternatively, you can use **Conda**, which includes Python. Download and install Conda from https://docs.conda.io/projects/conda/en/stable/.
+
+**Open the Terminal**
+Once you have installed Conda, open your terminal. On Windows, you can use the Anaconda Prompt, while on macOS and Linux, you can use the standard terminal.
+
+**Set up a virtual environment**  
+   Create an isolated environment using `conda`.
+
+[source,console]
+----
+conda create --name ms2decide_env python=3.12
+----
+
+During the process, you will see a message like this:
+[source,console]
+----
+The following NEW packages will be INSTALLED:
+...
+...
+Proceed ([y]/n)?
+----
+
+Make sure to type **y** (or press Enter) to proceed with the installation.
+
+**Install the library**  
+   You can install it using `pip` by replacing `MS2DECIDE_Folder` with the actual path to the folder:
+
+[source,console]
+----
+pip install 'MS2DECIDE_Folder'.
+----
+
+   If you are installing from a GitHub repository, use:
+
+[source,console]
+----
+conda install anaconda::git
+pip install git+https://github.com/MejriY/MS2DECIDE.git
+----
+
+**Verify the installation**  
+   Check if the library is installed successfully:
+
+[source,console]
+----
+python -c "import ms2decide; print('MS2DECIDE installed successfully!')"
+----
+
+== How do we face tools inability to annotate
+
+=== GNPS
+In scenarios where there is no match with GNPS or no match with Sirius, the tanimoto between GNPS and Sirius cannot be calculated. Hence, a default value of 0.7 was assigned to $T_{gs}$ and $T_{gi}$ in these instances.
+
+=== Sirius
+Sirius annotations were performed in batch mode by using Sirius 6. we utilized the Confidence Approximate score. Unfortunately, in some cases, Sirius was not able to propose an annotation. To remedy, we associated a value of 0.5 to Sirius matching score.
+
+=== ISDB-LOTUS
+For ISDB-LOTUS, since a strict library search was applied (0.02 Da), we considered a zero answer as an important information regarding our definition of novelty. Hence, no mean value was associated.
+
+## License
+
+`ms2decide` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+
+
+
